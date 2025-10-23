@@ -1,35 +1,77 @@
 import { Tabs } from 'expo-router';
 import React from 'react';
+import { Text } from 'react-native';
+import { AppHeader } from '../../components/AppHeader';
 
-import { HapticTab } from '@/components/haptic-tab';
-import { IconSymbol } from '@/components/ui/icon-symbol';
-import { Colors } from '@/constants/theme';
-import { useColorScheme } from '@/hooks/use-color-scheme';
-
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
-  return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
-        tabBarButton: HapticTab,
-      }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="explore"
-        options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
-        }}
-      />
-    </Tabs>
-  );
+export default function TabsLayout() {
+    return (
+        <Tabs
+            screenOptions={{
+                header: () => <AppHeader />,
+                tabBarStyle: {
+                    backgroundColor: '#171D25',
+                    borderTopColor: '#1F242B',
+                },
+                tabBarActiveTintColor: '#1A9FFF',
+                tabBarInactiveTintColor: '#DCDEDF',
+                tabBarLabelStyle: { fontWeight: '600' },
+                sceneStyle: { backgroundColor: '#2D333C' },
+            }}
+        >
+            <Tabs.Screen
+                name="index"
+                options={{
+                    title: 'Home',
+                    tabBarLabel: ({ color, focused }) => (
+                        <Text
+                            style={{
+                                color,
+                                textDecorationLine: focused ? 'underline' : 'none',
+                                textDecorationColor: focused ? '#1A9FFF' : undefined,
+                                fontWeight: '600',
+                            }}
+                        >
+                            Home
+                        </Text>
+                    ),
+                }}
+            />
+            <Tabs.Screen
+                name="genres"
+                options={{
+                    title: 'Genres',
+                    tabBarLabel: ({ color, focused }) => (
+                        <Text
+                            style={{
+                                color,
+                                textDecorationLine: focused ? 'underline' : 'none',
+                                textDecorationColor: focused ? '#1A9FFF' : undefined,
+                                fontWeight: '600',
+                            }}
+                        >
+                            Genres
+                        </Text>
+                    ),
+                }}
+            />
+            <Tabs.Screen
+                name="games"
+                options={{
+                    title: 'Games',
+                    tabBarLabel: ({ color, focused }) => (
+                        <Text
+                            style={{
+                                color,
+                                textDecorationLine: focused ? 'underline' : 'none',
+                                textDecorationColor: focused ? '#1A9FFF' : undefined,
+                                fontWeight: '600',
+                            }}
+                        >
+                            Games
+                        </Text>
+                    ),
+                }}
+            />
+        </Tabs>
+    );
 }
