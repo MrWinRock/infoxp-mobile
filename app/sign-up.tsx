@@ -1,10 +1,10 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-export default function SignIn() {
+export default function SignUp() {
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Sign in</Text>
+            <Text style={styles.title}>Sign up</Text>
             <Text style={styles.subtitle}>This is a placeholder screen.</Text>
         </View>
     );
