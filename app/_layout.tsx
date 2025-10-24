@@ -20,6 +20,14 @@ export default function RootLayout() {
           contentStyle: { backgroundColor: '#2D333C' },
         }}
       />
+      <Stack.Screen
+        name="profile"
+        options={{
+          headerShown: true,
+          header: () => <AppHeader showBack />,
+          contentStyle: { backgroundColor: '#2D333C' },
+        }}
+      />
     </Stack>
   );
 }

@@ -1,5 +1,5 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { apiClient } from './apiClient';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { apiClient } from "./apiClient";
 
 export interface LoginPayload {
     email: string;
@@ -28,23 +28,24 @@ export interface AuthResult {
 }
 
 export const login = async (data: LoginPayload): Promise<AuthResult> => {
-    const res = await apiClient.post<AuthResult>('/api/users/login', data);
+    const res = await apiClient.post<AuthResult>("/api/users/login", data);
     if (res.data?.token) {
-        await AsyncStorage.setItem('auth_token', res.data.token);
+        await AsyncStorage.setItem("auth_token", res.data.token);
+    }
+    if (res.data?.user) {
+        await AsyncStorage.setItem("auth.user", JSON.stringify(res.data.user));
     }
     return res.data;
 };
 
-export const register = async (data: RegisterPayload): Promise<{ status: number; body: AuthResult }> => {
-    const res = await apiClient.post<AuthResult>('/api/users/register', data);
+export const register = async (
+    data: RegisterPayload,
+): Promise<{ status: number; body: AuthResult }> => {
+    const res = await apiClient.post<AuthResult>("/api/users/register", data);
     return { status: res.status, body: res.data };
 };
 
 export const logout = async (): Promise<void> => {
-    await AsyncStorage.removeItem('auth_token');
-};
-
-export const getCurrentUser = async (): Promise<AuthUser | undefined> => {
-    const res = await apiClient.get<AuthUser>('/api/users/me');
-    return res.data;
+    await AsyncStorage.removeItem("auth_token");
+    await AsyncStorage.removeItem("auth.user");
 };
