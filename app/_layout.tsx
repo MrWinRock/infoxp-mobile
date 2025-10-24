@@ -28,6 +28,14 @@ export default function RootLayout() {
           contentStyle: { backgroundColor: '#2D333C' },
         }}
       />
+      <Stack.Screen
+        name="game/[id]"
+        options={{
+          headerShown: true,
+          header: () => <AppHeader showBack />,
+          contentStyle: { backgroundColor: '#2D333C' },
+        }}
+      />
     </Stack>
   );
 }
